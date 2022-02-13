@@ -30,6 +30,8 @@ namespace ConsertAe.Classes
 
                 if (Key == null || Key.GetValue(keyName) == null || Key.GetValue(keyName).ToString() != keyValue)
                     Key.SetValue(keyName, keyValue, RegistryValueKind.DWord);
+
+                Key.Close();
             }
             catch (Exception x)
             {
@@ -56,6 +58,7 @@ namespace ConsertAe.Classes
                 }
 
                 Key.DeleteValue(keyName, false);
+                Key.Close();
             }
             catch (Exception x)
             {
