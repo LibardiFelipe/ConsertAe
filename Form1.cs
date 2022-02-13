@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
 using System.ServiceProcess;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Win32;
 using ConsertAe.Classes;
 
 namespace ConsertAe
@@ -73,7 +65,7 @@ namespace ConsertAe
                 Process.Start(startInfo);
             }
             catch (Exception x) {
-                MessageBox.Show(x.Message);
+                TextDialog.Show(x.Message, false, EMessageCode.Error);
             }
         }
 
@@ -92,12 +84,12 @@ namespace ConsertAe
                     if (fbd.ShowDialog() == DialogResult.OK)
                         GrantAccess(fbd.SelectedPath);
 
-                    MessageBox.Show($"Permissão total garantida!\n\"{fbd.SelectedPath}\"");
+                    TextDialog.Show($"Permissão total garantida!\n\"{fbd.SelectedPath}\"");
                 }
             }
             catch (Exception x)
             {
-                MessageBox.Show(x.Message);
+                TextDialog.Show(x.Message, false, EMessageCode.Error);
             }
         }
 
@@ -120,7 +112,7 @@ namespace ConsertAe
             foreach (DirectoryInfo subDirectory in di.EnumerateDirectories())
                 try { subDirectory.Delete(true); } catch { }
 
-            MessageBox.Show("Arquivos limpos!");
+            TextDialog.Show("Arquivos temporários limpos!");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -169,7 +161,7 @@ namespace ConsertAe
             // Inicia o spooler
             ExecuteCommandOnCMD("net start \"Spooler\"");
 
-            MessageBox.Show("Fila limpa!");
+            TextDialog.Show("Fila de impressão limpa!");
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -198,7 +190,7 @@ namespace ConsertAe
             // Checkbox 4:
             ManageWindowsClock(checkBox4.Checked);
 
-            var result = MessageBox.Show("Mudanças aplicadas!\nDeseja reiniciar o computador agora?", "ConsertAe", MessageBoxButtons.YesNo);
+            var result = TextDialog.Show("Mudanças aplicadas!\nDeseja reiniciar o computador agora?", true, EMessageCode.Question);
             if (result == DialogResult.Yes)
             {
                 ExecuteCommandOnCMD("shutdown /r /t 0");
@@ -264,7 +256,7 @@ namespace ConsertAe
 
             // TODO: Testar (seta o usuário atual da máquina como o usuário ativo)
             ExecuteCommandOnCMD($"NET USER \"{Environment.MachineName}\" /ACTIVE:YES");
-            MessageBox.Show("O procotolo SMB1 será instalado!\nPor favor, não feche a janela nem desligue o computador.");
+            TextDialog.Show("O procotolo SMB1 será instalado!\nPor favor, não feche a janela nem desligue o computador.");
             ExecuteCommandOnCMD("DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol", false); // Janela precisa ser exibida pra informar status da instalação
         }
 
@@ -431,7 +423,7 @@ namespace ConsertAe
                 RegistryKeyManager.DeleteKeyValue(keyPath, keyName);
 
             // IMPORTANTE:
-            MessageBox.Show("Para desativar/ativar, abra o WU e clique em 'verificar se há atualizações' antes de reiniciar o PC!");
+            TextDialog.Show("Para desativar/ativar, abra o WU e clique em 'verificar se há atualizações' antes de reiniciar o PC!");
         }
 
         private void DisableTimeline(bool bDisable)
@@ -544,7 +536,7 @@ namespace ConsertAe
         private void button13_Click(object sender, EventArgs e)
         {
             FixBadNetworkSharing();
-            MessageBox.Show("Não esqueça de ativar o compartilhamento de arquivos e impressoras nas configurações de rede.");
+            TextDialog.Show("Não esqueça de ativar o compartilhamento de arquivos e impressoras nas configurações de rede.");
         }
 
         private void button14_Click(object sender, EventArgs e)
