@@ -50,6 +50,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -86,7 +87,7 @@
             this.checkBox4.Location = new System.Drawing.Point(167, 86);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(187, 20);
+            this.checkBox4.Size = new System.Drawing.Size(188, 20);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "Atualizar horário usando a internet";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -97,7 +98,7 @@
             this.checkBox1.Location = new System.Drawing.Point(167, 14);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 20);
+            this.checkBox1.Size = new System.Drawing.Size(101, 20);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Otimizar sistema";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -108,7 +109,7 @@
             this.checkBox2.Location = new System.Drawing.Point(167, 38);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(153, 20);
+            this.checkBox2.Size = new System.Drawing.Size(154, 20);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Desativar Windows Update";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -119,7 +120,7 @@
             this.checkBox3.Location = new System.Drawing.Point(167, 62);
             this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(163, 20);
+            this.checkBox3.Size = new System.Drawing.Size(164, 20);
             this.checkBox3.TabIndex = 0;
             this.checkBox3.Text = "Desativar Windows Defender";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -130,7 +131,7 @@
             this.checkBox6.Location = new System.Drawing.Point(23, 14);
             this.checkBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(216, 20);
+            this.checkBox6.Size = new System.Drawing.Size(217, 20);
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Text = "Executar programa ao iniciar o Windows";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -139,7 +140,7 @@
             // 
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.checkBox6);
-            this.groupBox2.Location = new System.Drawing.Point(280, 348);
+            this.groupBox2.Location = new System.Drawing.Point(280, 386);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(263, 82);
             this.groupBox2.TabIndex = 6;
@@ -263,6 +264,7 @@
             this.button11.TabIndex = 14;
             this.button11.Text = "ATIVAR O WINDOWS PHOTO VIEWER";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -300,11 +302,24 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
+            // button15
+            // 
+            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button15.Location = new System.Drawing.Point(280, 355);
+            this.button15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(263, 30);
+            this.button15.TabIndex = 18;
+            this.button15.Text = "ABRIR REGEDIT x64";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 441);
+            this.ClientSize = new System.Drawing.Size(554, 477);
+            this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
@@ -361,6 +376,7 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }
 

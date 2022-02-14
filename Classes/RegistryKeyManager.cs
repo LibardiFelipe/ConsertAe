@@ -10,7 +10,7 @@ namespace ConsertAe.Classes
 {
     public static class RegistryKeyManager
     {
-        public static void ChangeKeyValue(string keyPath, string keyName, string keyValue)
+        public static void ChangeKeyValue(string keyPath, string keyName, string keyValue, RegistryValueKind valueType = RegistryValueKind.DWord)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace ConsertAe.Classes
                 }
 
                 if (Key == null || Key.GetValue(keyName) == null || Key.GetValue(keyName).ToString() != keyValue)
-                    Key.SetValue(keyName, keyValue, RegistryValueKind.DWord);
+                    Key.SetValue(keyName, keyValue, valueType);
 
                 Key.Close();
             }

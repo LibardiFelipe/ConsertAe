@@ -82,9 +82,10 @@ namespace ConsertAe
                 {
                     fbd.RootFolder = Environment.SpecialFolder.MyComputer;
                     if (fbd.ShowDialog() == DialogResult.OK)
+                    {
                         GrantAccess(fbd.SelectedPath);
-
-                    TextDialog.Show($"Permissão total garantida!\n\"{fbd.SelectedPath}\"");
+                        TextDialog.Show($"Permissão total garantida!\n\"{fbd.SelectedPath}\"");
+                    }
                 }
             }
             catch (Exception x)
@@ -257,7 +258,7 @@ namespace ConsertAe
             // TODO: Testar (seta o usuário atual da máquina como o usuário ativo)
             ExecuteCommandOnCMD($"NET USER \"{Environment.MachineName}\" /ACTIVE:YES");
             TextDialog.Show("O procotolo SMB1 será instalado!\nPor favor, não feche a janela nem desligue o computador.");
-            ExecuteCommandOnCMD("DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol", false); // Janela precisa ser exibida pra informar status da instalação
+            ExecuteCommandOnCMD("DISM /Online /Enable-Feature /All /FeatureName:SMB1Protocol", false);
         }
 
         private void ManageWindowsClock(bool bUpdate)
@@ -547,6 +548,60 @@ namespace ConsertAe
             // AUTO: netsh interface ipv4 set address name=”Wi-Fi” source=dhcp
             // netsh interface ipv4 set dns name="Wi-Fi" static 8.8.8.8
             // netsh interface ipv4 set dns name="Wi-Fi" static 8.8.4.4 index=2
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations
+            // 1 ".bmp"="PhotoViewer.FileAssoc.Tiff"
+            // 2 ".dib" = "PhotoViewer.FileAssoc.Tiff"
+            // 3 ".gif" = "PhotoViewer.FileAssoc.Tiff"
+            // 4 ".jfif" = "PhotoViewer.FileAssoc.Tiff"
+            // 5 ".jpe" = "PhotoViewer.FileAssoc.Tiff"
+            // 6 ".jpeg" = "PhotoViewer.FileAssoc.Tiff"
+            // 7 ".jpg" = "PhotoViewer.FileAssoc.Tiff"
+            // 8 ".jxr" = "PhotoViewer.FileAssoc.Tiff"
+            // 9 ".png" = "PhotoViewer.FileAssoc.Tiff"
+            // 10 ".tif" = "PhotoViewer.FileAssoc.Tiff"
+            // 11 ".tiff" = "PhotoViewer.FileAssoc.Tiff"
+            string keyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations";
+            string keyName = ".bmp";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".dib";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".gif";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".jfif";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".jpe";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".jpeg";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".jpg";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".jxr";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".png";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".tif";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+            keyName = ".tiff";
+            RegistryKeyManager.ChangeKeyValue(keyPath, keyName, "PhotoViewer.FileAssoc.Tiff", Microsoft.Win32.RegistryValueKind.String);
+
+            TextDialog.Show("Tudo pronto!\nNão esqueça de ativar o visualizador nas configurações!");
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string systemPartitionLetter = Path.GetPathRoot(Environment.SystemDirectory);
+                Process.Start($@"{systemPartitionLetter}Windows\SysWOW64\regedit.exe");
+            }
+            catch (Exception x)
+            {
+                TextDialog.Show(x.Message, false, EMessageCode.Error);
+            }
         }
     }
 }
